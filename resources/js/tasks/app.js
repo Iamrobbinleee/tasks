@@ -4,6 +4,7 @@ import "../bootstrap.js";
 import "semantic-ui-css/semantic.min.css";
 import "semantic-ui-css/semantic.min.js";
 import axios from "axios";
+import { createPinia } from 'pinia'
 import Task from "../tasks/components/Task.vue";
 
 axios.defaults.headers.common["X-CSRF-TOKEN"] = document
@@ -25,4 +26,6 @@ const App = {
     `,
 };
 
-createApp(App).use(router).mount("#tasks");
+const pinia = createPinia();
+
+createApp(App).use(router).use(pinia).mount("#tasks");
