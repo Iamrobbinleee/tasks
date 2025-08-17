@@ -5,6 +5,7 @@ export const storeTask = defineStore('taskStore', {
     state: () => ({
         tasks: [],
         loading: false,
+        selectedTask: null,
     }),
     actions: {
         async fetchTasks() {
@@ -24,6 +25,12 @@ export const storeTask = defineStore('taskStore', {
         async deleteTask(id) {
             await axios.delete(`/api/tasks/${id}`);
             this.fetchTasks();
+        },
+        viewTask(id) {
+            this.selectedTask = this.tasks.find(t => t.id === id) || null;
+        },
+        closeTask() {
+            this.selectedTask = null;
         }
     }
 });
