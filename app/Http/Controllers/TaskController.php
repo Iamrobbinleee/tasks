@@ -12,12 +12,12 @@ class TaskController extends Controller
         try {
             $tasks = Task::whereNull('deleted_at')->get();
             if($tasks->isEmpty()){
-                return response([
+                return response()->json([
                     'message' => 'No Tasks Found.',
                 ]);
             }
 
-            return response([
+            return response()->json([
                 'tasks' => $tasks,
             ]);
         } catch (\Exception $e) {
@@ -38,12 +38,12 @@ class TaskController extends Controller
            ->whereNull('deleted_at')
            ->first();
             if(!$task){
-                return response([
+                return response()->json([
                     'message' => 'Task not Found.',
                 ]);
             }
 
-            return response([
+            return response()->json([
                 'task' => $task,
             ]);
         } catch (\Exception $e) {
@@ -72,7 +72,7 @@ class TaskController extends Controller
 
             $new_task = Task::create($validate_task);
 
-            return response([
+            return response()->json([
                 'message' => 'New Task has been added successfully!',
                 'data' => $new_task
             ], 201);
@@ -108,7 +108,7 @@ class TaskController extends Controller
 
             $task->update($validate_task);
 
-            return response([
+            return response()->json([
                 'message' => 'Task has been updated successfully!',
                 'data' => $task
             ], 200);
